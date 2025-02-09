@@ -92,12 +92,6 @@ img:hover {
     background: #2973f4; /* 鼠标悬停时的颜色 */
     transform: scale(1.05); /* 按钮放大效果 */
 }
-#footerFile {
-    background: #07af6f;
-}
-#footerFile:hover {
-    background: #19a16d;
-}
 
 /* 响应式布局 */
 @media (max-width: 768px) {
@@ -131,9 +125,6 @@ img:hover {
         <button id="footer" class="footer">
             分享图片
         </button>
-        <button id="footerFile" class="footer">
-            分享文件
-        </button>
     </div>
     <script>
         // 分享图片的功能
@@ -161,30 +152,6 @@ img:hover {
             }
         });
 
-        // 分享 APK 的功能
-document.getElementById('footerFile').addEventListener('click', async () => {
-    if (navigator.share) {
-        try {
-            // 获取 APK 文件的 Blob 对象
-            const apkBlob = await fetch('https://fuck-qq.com/th/vpn/freeVPN.apk').then(response => response.blob());
-
-            // 创建 File 对象
-            const file = new File([apkBlob], 'app.apk', { type: 'application/vnd.android.package-archive' });
-
-            // 调用 Web Share API 分享 APK 文件
-            await navigator.share({
-                title: document.title,
-                files: [file]  // 分享 APK 文件
-            });
-
-            console.log('APK 文件分享成功');
-        } catch (err) {
-            console.error('分享出错:', err);
-        }
-    } else {
-        alert('您的浏览器不支持 Web Share API。');
-    }
-});
 
     </script>
 </body>
