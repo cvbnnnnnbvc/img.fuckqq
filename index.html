@@ -88,10 +88,15 @@ img:hover {
     transition: background 0.3s ease, transform 0.3s ease;
     margin-top: 20px; /* 按钮与其他元素之间的间距 */
 }
-
 .footer:hover {
-    background: #2575fc; /* 鼠标悬停时的颜色 */
+    background: #973afb; /* 鼠标悬停时的颜色 */
     transform: scale(1.05); /* 按钮放大效果 */
+}
+#footerFile {
+    background: #1f70e2;
+}
+#footerFile:hover {
+    background: rgb(88, 103, 246);
 }
 
 /* 响应式布局 */
@@ -126,8 +131,12 @@ img:hover {
         <button id="footer" class="footer">
             分享图片
         </button>
+        <button id="footerFile" class="footer">
+            分享文件
+        </button>
     </div>
-     <script>
+    <script>
+        // 分享图片的功能
         document.getElementById('footer').addEventListener('click', async () => {
             if (navigator.share) {
                 try {
@@ -137,14 +146,38 @@ img:hover {
                     // 创建 File 对象
                     const file = new File([imageBlob], '小彰鼠.jpg', { type: 'image/jpeg' });
                     
-                    // 调用 Web Share API 分享图片和文字
+                    // 调用 Web Share API 分享图片
                     await navigator.share({
                         title: document.title,
-                        text: '这是小彰鼠，一只毛茸茸的可爱小鼠！',
-                        files: [file]  // 分享文件
+                        files: [file]
                     });
                     
-                    console.log('图片和文字分享成功');
+                    console.log('图片分享成功');
+                } catch (err) {
+                    console.error('分享出错:', err);
+                }
+            } else {
+                alert('您的浏览器不支持 Web Share API。');
+            }
+        });
+
+        // 分享文件的功能
+        document.getElementById('footerFile').addEventListener('click', async () => {
+            if (navigator.share) {
+                try {
+                    // 获取图片的 Blob 对象
+                    const imageBlob = await fetch('images/小彰鼠.jpg').then(response => response.blob());
+
+                    // 创建 File 对象
+                    const file = new File([imageBlob], '小彰鼠.jpg', { type: 'image/jpeg' });
+
+                    // 调用 Web Share API 分享文件
+                    await navigator.share({
+                        title: document.title,
+                        files: [file]  // 分享文件
+                    });
+
+                    console.log('文件分享成功');
                 } catch (err) {
                     console.error('分享出错:', err);
                 }
