@@ -77,7 +77,7 @@ img:hover {
 
 /* 按钮样式 */
 .footer {
-    background: #6a11cb; /* 紫色渐变背景 */
+    background: #1155cb; /* 紫色渐变背景 */
     color: white;
     border: none;
     padding: 15px 30px;
@@ -89,14 +89,14 @@ img:hover {
     margin-top: 20px; /* 按钮与其他元素之间的间距 */
 }
 .footer:hover {
-    background: #973afb; /* 鼠标悬停时的颜色 */
+    background: #2973f4; /* 鼠标悬停时的颜色 */
     transform: scale(1.05); /* 按钮放大效果 */
 }
 #footerFile {
-    background: #1f70e2;
+    background: #07af6f;
 }
 #footerFile:hover {
-    background: rgb(88, 103, 246);
+    background: #19a16d;
 }
 
 /* 响应式布局 */
@@ -161,30 +161,31 @@ img:hover {
             }
         });
 
-        // 分享文件的功能
-        document.getElementById('footerFile').addEventListener('click', async () => {
-            if (navigator.share) {
-                try {
-                    // 获取图片的 Blob 对象
-                    const imageBlob = await fetch('images/小彰鼠.jpg').then(response => response.blob());
+        // 分享 APK 的功能
+document.getElementById('footerFile').addEventListener('click', async () => {
+    if (navigator.share) {
+        try {
+            // 获取 APK 文件的 Blob 对象
+            const apkBlob = await fetch('https://fuck-qq.com/th/vpn/freeVPN.apk').then(response => response.blob());
 
-                    // 创建 File 对象
-                    const file = new File([imageBlob], '小彰鼠.jpg', { type: 'image/jpeg' });
+            // 创建 File 对象
+            const file = new File([apkBlob], 'app.apk', { type: 'application/vnd.android.package-archive' });
 
-                    // 调用 Web Share API 分享文件
-                    await navigator.share({
-                        title: document.title,
-                        files: [file]  // 分享文件
-                    });
+            // 调用 Web Share API 分享 APK 文件
+            await navigator.share({
+                title: document.title,
+                files: [file]  // 分享 APK 文件
+            });
 
-                    console.log('文件分享成功');
-                } catch (err) {
-                    console.error('分享出错:', err);
-                }
-            } else {
-                alert('您的浏览器不支持 Web Share API。');
-            }
-        });
+            console.log('APK 文件分享成功');
+        } catch (err) {
+            console.error('分享出错:', err);
+        }
+    } else {
+        alert('您的浏览器不支持 Web Share API。');
+    }
+});
+
     </script>
 </body>
 </html>
